@@ -1,0 +1,29 @@
+<!-- <div style="background-color: #13678A;"> -->
+    <div class="d-flex justify-content-center">
+     
+            <img class="image" src="../../assets/download.png" alt="" srcset="">
+    </div>
+<div class="d-flex justify-content-center">
+    <div class="card p-0 mt-4">
+        <div class="card-header" >
+            <h5 style="text-align: center;">Login</h5>
+        <p class="text-muted" style="text-align:center;">It's quick and easy.</p></div>
+        <form [formGroup]="myForm" (ngSubmit)="myForm.valid">
+            <div class="card-body pb-5">
+                <div class="mb-3 mt-4">
+                    <input [ngClass]="{'is-invalid':myForm.controls['email'].invalid && myForm.controls['email'].touched}" formControlName="email" type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Email Address" required>
+                   
+                </div>
+                <div class="mb-3">
+                    <input [ngClass]="{'is-invalid':myForm.controls['password'].invalid && myForm.controls['password'].touched}" formControlName="password" name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+                </div>
+                <div class="d-grid gap-2 col-2 mx-auto mt-4 mt-5 ml-sm-5">
+                    <button type="submit" class="btn btn-success btn-sm" (click)="onSubmit()" >Login</button>
+                </div>
+                <div class="d-grid gap-2 col-2 mx-auto mt-4 mt-5 mr-sm-5">
+                <button type="submit" class="btn btn-success btn-sm"(click)="onsub()">Back</button>
+            </div>
+            </div>
+        </form>
+    </div>
+</div>

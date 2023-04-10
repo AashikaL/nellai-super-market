@@ -1,0 +1,138 @@
+<div class="d-flex justify-content-center">
+    <div class="card mt-4 mb-4" style="width: 35rem;">
+        <div class="card-header">
+            <h5 style="text-align: center;">Billing Address</h5>
+            <p class="text-muted" style="text-align:center;">It's quick and easy.</p>
+        </div>
+        <form [formGroup]="myForm">
+            <div class="card-body">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="name"
+                        [ngClass]="{'is-invalid':myForm.controls['name'].invalid && myForm.controls['name'].touched}"
+                        formControlName="name" class="form-control" placeholder="Lakshmi L.">
+                    <div class="invalid-feedback">
+                        Please enter name
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email"
+                        [ngClass]="{'is-invalid':myForm.controls['email'].invalid && myForm.controls['email'].touched}"
+                        formControlName="email" class="form-control" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" placeholder="lakshmi@example.com">
+                    <div class="invalid-feedback">
+                        Please enter email
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Address</label>
+                    <input type="Address"
+                        [ngClass]="{'is-invalid':myForm.controls['address'].invalid && myForm.controls['address'].touched}"
+                        formControlName="address" class="form-control" placeholder="542 W. 15th Street">
+                    <div class="invalid-feedback">
+                        Please enter address
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>City</label>
+                    <input type="city"
+                        [ngClass]="{'is-invalid':myForm.controls['city'].invalid && myForm.controls['city'].touched}"
+                        formControlName="city" class="form-control" placeholder="Tirunelveli">
+                    <div class="invalid-feedback">
+                        Please enter city
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Zip</label>
+                    <input type="zip"
+                    [ngClass]="{'is-invalid':myForm.controls['zip'].invalid && myForm.controls['zip'].touched}"
+                        formControlName="zip" class="form-control" placeholder="10001">
+                    <div class="invalid-feedback">
+                        Please enter zip
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>State</label>
+                    <input type="state"
+                        [ngClass]="{'is-invalid':myForm.controls['state'].invalid && myForm.controls['state'].touched}"
+                        formControlName="state" class="form-control" placeholder="Tamil Nadu">
+                    <div class="invalid-feedback">
+                        Please enter state
+                    </div>
+                </div>
+                <label>
+                    <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
+                </label>
+                <div class="row">
+                    <div class="col-4 mx-auto mt-3 mt-4 mb-1">
+                        <button type="submit" class="btn btn-sm btn-primary" (click)="onSubmit()" [disabled]="myForm.invalid">Place Order</button>
+                    </div>
+                    <div class=" col-4 mx-auto mt-3 mt-4 mb-1 ">
+                        <a routerLink="/phone" class="btn btn-sm btn-info float-right" style="height: 100%;">Continue
+                            Shopping</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title" id="staticBackdropLabel">
+                    <h5 style="text-align: center;">Payment</h5>
+                    <p class="text-muted" style="text-align:center;">Accepted Cards</p>
+                    <div class="row">
+                        <div class="col">
+                            <img class="img ml-sm-2" src="../../assets/cc-visa.svg" width="40" height="40">
+                            <img class="img ml-sm-2" src="../../assets/cc-paypal.svg" width="40" height="40">
+                            <img class="img ml-sm-2" src="../../assets/payment.svg" width="50" height="50">
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="email" class="form-control" placeholder="Lakshmi L.">
+                        </div>
+                        <div class="form-group">
+
+                            <label>Credit card number</label>
+                            <input type="text" class="form-control" placeholder="1111-2222-3333-4444">
+                        </div>
+                        <div class="form-group">
+
+                            <label>Exp Month</label>
+                            <input type="text" class="form-control" placeholder="September">
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <label>Exp Year</label>
+                                <input type="text" class="form-control" placeholder="2018">
+                            </div>
+                            <div class="col-4">
+                                <label>CVV</label>
+                                <input type="text" class="form-control" placeholder="352">
+                            </div>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-outline-primary mt-4">Confirm</button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

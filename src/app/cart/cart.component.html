@@ -1,0 +1,85 @@
+<app-navbar></app-navbar>
+<!-- <div class="container">
+<div>
+    <button class="btn btn-outline-primary mr-sm-2" type="submit" (click)="clearCart()">Clear</button>
+</div>
+    <div class="row">
+      <div class="col-4 " *ngFor="let cartItem of cartItems; let i=index;">
+        <div class="card mt-4" style="width: 18rem;">
+          <h5 class="card-header">{{cartItem.name}}</h5>
+          <div class="card-body">
+            <img class="card-img-top mx-auto d-block" [src]="cartItem.url" alt="product.alt">
+            <p class="card-text"></p>
+            <div>{{cartItem.color}}</div>
+            <div> {{cartItem.cost | currency: 'INR'}}</div>
+          </div>
+          <div class="card-footer">
+                <div class="row ">
+                  <div class="col">
+                <div>
+                  <a style="background-color:#F27127" class="btn" routerLink="/buynow">Buy Now</a>
+                </div>
+                  </div>
+            <div class="col">
+              <a class="btn btn-warning" (click)="removeItem(i)">RemoveItem</a>
+            </div>
+                </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+     
+
+
+      <div class="container">
+        <div class="d-flex justify-content-center">
+      <div class="card text-center" style="width: 30rem;">
+  <div class="card-header">
+    Your Cart Items
+    <button type="button" class="btn btn-sm btn-warning float-right">
+        Total items <span class="badge badge-light" >{{cs.cartData.length}}</span>    
+           
+    </button>
+    <button type="button" class="btn btn-sm btn-danger mr-2 float-right" (click)="clearCart()">Empty Cart       
+    </button>
+  </div>
+  <div class="card-body">  
+    <table class="table">
+      <thead>
+        <tr>      
+          <th scope="col">Product</th>
+          <th scope="col">Price</th>
+          <th scope="col">Qty</th>
+          <th scope="col">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+        
+        </tr>
+        <tr *ngFor="let cartData of cs.cartData; let i=index; ">      
+          <td class="text-left">{{cartData.name}}</td>
+          <td>{{cartData.cost}}</td>
+          <td class="w30">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <button class="btn btn-info" type="button" (click)="changeQty(cartData, '+')">+</button>
+              </div>
+              <input type="text" class="form-control text-center" value="{{qty}}">
+              <div class="input-group-append">
+                <button class="btn btn-danger" type="button" (click)="changeQty(cartData, '-')" >-</button>
+              </div>
+            </div>
+          </td>
+          <td>{{cartData.cost * qty}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <a routerLink = "/buynow" class="btn btn-sm btn-primary" >Checkout</a>
+  </div>
+  <div class="card-footer text-muted font-weight-bold">
+    Total : Rs.{{totalPrice}}
+  </div>  
+</div>
+</div></div>

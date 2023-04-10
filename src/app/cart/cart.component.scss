@@ -1,0 +1,35 @@
+.card-img-top{
+    height: 100px;
+    width: 100px;
+}
+.navbar{
+  background-color: rgb(252, 226, 140);
+}
+.btn:hover {
+    color: #fff;
+  }
+ .card:hover {
+  background-color: #f8f9fa;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+div.card {
+    width: 250px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+  }
+  div.container {
+    padding: 10px;
+  }
+  h1 {
+    text-align: center;
+  }
+  .btn-warning{
+    padding: 6px;
+  }
+.card-img-top{
+  object-fit: contain;
+}
+form .ng-invalid.ng-touched{
+  border-color: #dc3545;
+}

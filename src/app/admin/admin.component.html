@@ -1,0 +1,94 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Admin</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <form class="form-inline my-2 my-lg-0">
+    <button class="btn btn-outline-info mr-sm-2" type="submit" routerLink="/home">Home</button>
+    <button class="btn btn-outline-primary mr-sm-2" type="submit">Order</button>
+    <button class="btn btn-outline-success mr-sm-2" type="submit" data-toggle="modal"
+      data-target="#staticBackdrop">Add</button>
+  </form>
+</nav>
+
+
+<h1>Products</h1>
+<div class="container">
+  <div class="row">
+    <div class="pading col-4 col-lg-4 col-md-5" *ngFor=" let product of items; let i=index">
+      <div class="card mt-4" style="width: 18rem;">
+        <h5 class="card-header">{{product.name}}</h5>
+        <div class="card-body">
+          <img class="card-img-top mx-auto d-block" [src]="product.url" alt="product.alt">
+          <p class="card-text"></p>
+          <div>{{product.id}}</div>
+          <div>{{product.color}}</div>
+          <div> {{product.cost | currency: 'INR'}}</div>
+        </div>
+        <div class="card-footer">
+              <button class="btn btn-warning" (click)="removeItem(i)">Remove Item</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ 
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 style="text-align: center;">Add Items</h5>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="myForm">
+          <div class="mb-3">
+            <label for="exampleFormControlSelect1">Type</label>
+            <select class="form-control" formControlName="type" id="exampleFormControlSelect1" placeholder="phone">
+              <option>phone</option>
+              <option>clothing</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label>Product Name</label>
+            <input name="name" class="form-control" formControlName="name" placeholder="Product Name" required>
+          </div>
+          <div class="mb-3">
+            <label>Product Cost</label>
+            <input name="cost" class="form-control" formControlName="cost" placeholder="Product Cost" required>
+          </div>
+          <div class="mb-3">
+            <label>Product Color</label>
+            <input name="color" class="form-control" formControlName="color" placeholder="Product Color" required>
+          </div>
+          <div class="mb-3 mt-4">
+            <label>Product url</label>
+            <input name="url" class="form-control" formControlName="url" placeholder="Product url" required>
+          </div>
+          <button class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModal" (click)="addNew()">Add Items</button>
+
+        </form>
+      </div>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">'Your product added'</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
