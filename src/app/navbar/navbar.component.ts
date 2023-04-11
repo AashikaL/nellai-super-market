@@ -14,9 +14,6 @@ export class NavbarComponent {
   password: string = '';
 
   constructor(private router: Router) { }
-  sreach() {
-
-  }
   onSubmit() {
     if (this.email === 'admin@gmail.com' && this.password === 'aashika') {
       $('#staticBackdrop').modal('hide')
