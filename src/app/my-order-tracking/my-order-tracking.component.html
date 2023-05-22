@@ -1,0 +1,29 @@
+<!-- <div class="order-tracking">
+    <div class="step" *ngFor="let step of steps; let i = index">
+      <div class="step-number">{{i+1}} 
+        < <img src="../../assets/icons8-track.gif" alt=""> 
+      </div>
+      <div>
+        <img src="../../assets/31564-horizontal-line.gif" alt="">
+      </div>
+      <div class="step-text">{{ step.text }}</div>
+    </div>
+  </div>-->
+  
+  <div class="order-tracking">
+    <div class="step" *ngFor="let step of steps; let i = index">
+      <div class="step-number">
+        <ng-container *ngIf="i === 0">
+          <img src="../../assets/icons8-track.gif" alt="">
+        </ng-container>
+        <ng-container *ngIf="i !== 0">
+          <div class="circle"></div>
+        </ng-container>
+      </div>
+      <div>
+        <div class="line"></div>
+      </div>
+      <div class="step-text">{{ step.text }}</div>
+    </div>
+  </div>
+  

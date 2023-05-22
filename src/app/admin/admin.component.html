@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top " >
   <a class="navbar-brand" href="#">Admin</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -6,8 +6,8 @@
   </button>
 
   <form class="form-inline my-2 my-lg-0">
-    <button class="btn btn-outline-info mr-sm-2" type="submit" routerLink="/home">Home</button>
-    <button class="btn btn-outline-primary mr-sm-2" type="submit">Order</button>
+    <button class="btn btn-outline-info mr-sm-2" type="submit" routerLink="">Home</button>
+    <button class="btn btn-outline-primary mr-sm-2" type="submit" routerLink="/admin-order">Order</button>
     <button class="btn btn-outline-success mr-sm-2" type="submit" data-toggle="modal"
       data-target="#staticBackdrop">Add</button>
   </form>
@@ -17,7 +17,7 @@
 <h1>Products</h1>
 <div class="container">
   <div class="row">
-    <div class="pading col-4 col-lg-4 col-md-5" *ngFor=" let product of items; let i=index">
+    <div class="pading col-4 col-lg-4 col-md-5" *ngFor=" let product of productItems; let i=index">
       <div class="card mt-4" style="width: 18rem;">
         <h5 class="card-header">{{product.name}}</h5>
         <div class="card-body">
@@ -50,12 +50,16 @@
         </button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="myForm">
+        <form [formGroup]="productAddForm">
           <div class="mb-3">
             <label for="exampleFormControlSelect1">Type</label>
             <select class="form-control" formControlName="type" id="exampleFormControlSelect1" placeholder="phone">
-              <option>phone</option>
-              <option>clothing</option>
+              <option>Phone</option>
+              <option>Clothing</option>
+              <option>Laptop</option>
+              <option>Shoe</option>
+              <option>Home Decor</option>
+              <option>Watch</option>
             </select>
           </div>
           <div class="mb-3">
@@ -64,7 +68,7 @@
           </div>
           <div class="mb-3">
             <label>Product Cost</label>
-            <input name="cost" class="form-control" formControlName="cost" placeholder="Product Cost" required>
+            <input name="cost"type="number" class="form-control" formControlName="cost" placeholder="Product Cost" required>
           </div>
           <div class="mb-3">
             <label>Product Color</label>
@@ -74,21 +78,8 @@
             <label>Product url</label>
             <input name="url" class="form-control" formControlName="url" placeholder="Product url" required>
           </div>
-          <button class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModal" (click)="addNew()">Add Items</button>
+          <button class="btn btn-outline-success" data-toggle="modal"  (click)="addNewProduct()">Add Items</button>
 
         </form>
-      </div>
-    </div>
-
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">'Your product added'</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        </div>
       </div>
     </div>

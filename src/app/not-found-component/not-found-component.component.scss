@@ -1,0 +1,43 @@
+.dot {
+    height: 100px;
+    width: 100px;
+    background-color: #f7f4f4;
+    
+    border-radius: 80%;
+    display: inline-block;
+  }
+  .form-control{
+    width: 200px;
+    text-align: center;
+    
+}
+.active-red {
+  background-color: red;
+}
+  .active-yellow {
+    background-color: yellow;
+  }
+  
+  .active-green {
+    background-color: green;
+  }
+  
+ 
+  .bike {
+    width: 100px;
+    height: 100px;
+    // background-color: red;
+    position: relative;
+    animation-name: example;
+    animation-iteration-count:infinite;
+    animation-direction:normal; 
+    animation-duration: 5s;
+    animation-delay: 5s;
+  }
+  
+  @keyframes example {
+    0%   {background-color:red; left:100px; top:0px;}
+    25%  {background-color:yellow; left:0px; top:0px;}
+    50%  {background-color:green; left:1200px; top:0px;}
+  }
+  

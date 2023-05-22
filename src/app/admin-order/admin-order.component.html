@@ -1,0 +1,49 @@
+<div class="container">
+    <h3 class="mt-5">User Orders</h3>
+    <div class="card m-4" *ngFor="let order of orders">
+      <div class="card-header">
+        <div class="row">
+          <div class="col">
+            <small class="text-muted">Order Placed: {{order.orderDate}}</small>
+            <a class="mx-4" href="" data-toggle="modal" data-target="#exampleModal" (click)="currentOrder=order">Ship
+              To</a>
+            </div>
+          <small class="text-muted mx-4">Order id - {{order.id}}</small>
+        </div>
+      </div>
+      <div class="row">
+        <div class="container" >
+                  <div style="display: inline-block; " class="card m-3 text-center" *ngFor="let product of order.product">
+            <h5 class="card-header ">{{product.name}}</h5>
+            <div class="card-body">
+              <img class="card align-img-top mx-auto d-block" [src]="product.url">
+              <div>{{product.color}}</div>
+              <div> {{product.cost | currency: 'INR'}}</div>
+            </div>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ship To Detail </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>{{currentOrder?.name}}</p>
+          <p>{{currentOrder?.address}},{{currentOrder?.city}},{{currentOrder?.state}}</p>
+          <p>{{currentOrder?.zip}}</p>
+          <p>Phone: {{currentOrder?.phNumber}}</p>
+  
+  
+        </div>
+      </div>
+    </div>

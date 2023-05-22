@@ -17,7 +17,7 @@
                 <div class="row ">
                   <div class="col">
                 <div>
-                  <a style="background-color:#F27127" class="btn" routerLink="/buynow">Buy Now</a>
+                  <a style="background-color:#F27127" class="btn" routerLink="/billing">Buy Now</a>
                 </div>
                   </div>
             <div class="col">
@@ -29,57 +29,61 @@
           </div>
         </div>
       </div> -->
-     
 
 
-      <div class="container">
-        <div class="d-flex justify-content-center">
-      <div class="card text-center" style="width: 30rem;">
-  <div class="card-header">
-    Your Cart Items
-    <button type="button" class="btn btn-sm btn-warning float-right">
-        Total items <span class="badge badge-light" >{{cs.cartData.length}}</span>    
-           
-    </button>
-    <button type="button" class="btn btn-sm btn-danger mr-2 float-right" (click)="clearCart()">Empty Cart       
-    </button>
+
+<div class="container">
+  <div class="d-flex justify-content-center">
+    <div class="card text-center" style="width: 35rem;">
+      <div class="card-header d-flex">
+        <div class="align-self-center">
+          Your Cart Items
+        </div>
+        <button type="button" class="btn btn-sm btn-warning ml-auto">
+          Total items <span class="badge badge-light">{{cs.cartData.length}}</span>
+
+        </button>
+        <button type="button" class="btn btn-sm btn-danger ml-2" (click)="emptycart()">Empty Cart
+        </button>
+      </div>
+      <div class="card-body p-0">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Product</th>
+              <th scope="col">Image</th>
+              <th scope="col">Price</th>
+              <th scope="col">Qty</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+            </tr>
+            <tr *ngFor="let cartData of cs.cartData; let i=index; ">
+              <td class="text-left">{{cartData.name}}</td>
+              <img class="mt-2" style="height: 50px;" [src]="cartData.url" alt="">
+              <td>{{cartData.cost | currency : 'INR'}}</td>
+              <td class="w30">
+                <div class="input-group input-group-sm mb-3">
+                  <div class="input-group-prepend">
+                    <button class="btn btn-info" type="button" (click)="changeQty(cartData, '-')">-</button>
+                  </div>
+                  <input id="show" type="text" class="form-control text-center" value="{{cartData.qty}}">
+                  <div class="input-group-append">
+                    <button class="btn btn-danger" type="button" (click)="changeQty(cartData, '+')">+</button>
+                  </div>
+                </div>
+              </td>
+              <td>{{cartData.cost * cartData.qty  | currency : 'INR'}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <a routerLink="/billing" class="btn btn-sm btn-primary mb-3">Checkout</a>
+      </div>
+      <div class="card-footer text-muted font-weight-bold">
+        Total : Rs.{{totalPrice}}
+      </div>
+    </div>
   </div>
-  <div class="card-body">  
-    <table class="table">
-      <thead>
-        <tr>      
-          <th scope="col">Product</th>
-          <th scope="col">Price</th>
-          <th scope="col">Qty</th>
-          <th scope="col">Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-        
-        </tr>
-        <tr *ngFor="let cartData of cs.cartData; let i=index; ">      
-          <td class="text-left">{{cartData.name}}</td>
-          <td>{{cartData.cost}}</td>
-          <td class="w30">
-            <div class="input-group input-group-sm mb-3">
-              <div class="input-group-prepend">
-                <button class="btn btn-info" type="button" (click)="changeQty(cartData, '+')">+</button>
-              </div>
-              <input type="text" class="form-control text-center" value="{{qty}}">
-              <div class="input-group-append">
-                <button class="btn btn-danger" type="button" (click)="changeQty(cartData, '-')" >-</button>
-              </div>
-            </div>
-          </td>
-          <td>{{cartData.cost * qty}}</td>
-        </tr>
-        </tbody>
-    </table>
-    <a routerLink = "/buynow" class="btn btn-sm btn-primary" >Checkout</a>
-  </div>
-  <div class="card-footer text-muted font-weight-bold">
-    Total : Rs.{{totalPrice}}
-  </div>  
 </div>
-</div></div>

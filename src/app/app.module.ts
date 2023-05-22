@@ -16,6 +16,12 @@ import { FilterPipe } from './search/filter.pipe';
 import { BillingComponent } from './billing/billing.component';
 import { AdminComponent } from './admin/admin.component';
 import { InvoiceComponent } from './invoice/invoice.component';
+import { MyOrdersComponent } from './my-orders/my-orders.component';
+import { MyOrderTrackingComponent } from './my-order-tracking/my-order-tracking.component';
+import { ProductsComponent } from './products/products.component';
+import { NotFoundComponentComponent } from './not-found-component/not-found-component.component';
+import { ProductOverViewComponent } from './product-over-view/product-over-view.component';
+import { AdminOrderComponent } from './admin-order/admin-order.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +38,12 @@ import { InvoiceComponent } from './invoice/invoice.component';
     BillingComponent,
     AdminComponent,
     InvoiceComponent,
+    MyOrdersComponent,
+    MyOrderTrackingComponent,
+    ProductsComponent,
+    NotFoundComponentComponent,
+    ProductOverViewComponent,
+    AdminOrderComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,39 @@
+<!-- <div class="row">
+    <div class="col-12 col-md-4 d-flex justify-content-center align-items-center" *ngFor=" let product of products; ">
+      <div class="card mt-4" style="width: 18rem;">
+        <h5 class="card-header">{{product.name}}</h5>
+        <div class="card-body">
+          <img class="card-img-top mx-auto d-block" [src]="product.url" alt="product.alt">
+          <p class="card-text"></p>
+          <div>Color: {{product.color}}</div>
+          <div> {{product.cost | currency: 'INR'}}</div>
+        </div>
+        <div class="card-footer">
+          <div class="row ">
+            <div class="col">
+              <div>
+                <a style="background-color:#F27127" class="btn">Buy Now</a>
+              </div>
+            </div> -->
+
+<div class="row">
+    <div class="container">
+    <div class="md-4 mt-5 d-flex justify-content-center align-items-center" *ngFor="let product of products">
+        <div class="col">
+            <img class="img sticky" [src]="product.url" alt="product.url" >
+        </div>
+        <div class="col">
+          <div style="font-size: 25px;"><strong>{{product.name}}</strong></div>
+            <div style="font-size: 25px;" class="mt-4"><strong>Colour</strong> </div>
+            <div class="mx-5 mt-2 form-control "  style="font-size: 20px;"> {{product.color}}</div>
+            <div class="mt-4" style="font-size: 25px;"><strong>Price</strong> </div>
+            <div class="mx-5 mt-2 form-control "  style="font-size: 20px;"> {{product.cost | currency: 'INR'}}</div>
+        </div>
+        
+    </div>
+    </div>
+</div>
+
+
+
+  

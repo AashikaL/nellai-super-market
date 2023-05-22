@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
+  loginfailed: boolean =false;
   myForm: FormGroup;
   constructor(private router: Router) {
     this.myForm = new FormGroup({
@@ -23,14 +24,15 @@ export class LoginComponent {
     // if(userExists) {
     //   localStorage.setItem("loggedIn", 'true');
     if (this.myForm.valid) {
-      this.router.navigate(['/home'])
+      this.router.navigate([''])
     } else {
-      window.alert("invalid")
+      //window.alert("invalid")
+      this.loginfailed=true;
     }
   }
   onsub() {
     if (this.myForm.invalid) {
-      this.router.navigate([''])
+      this.router.navigate(['/singup'])
     }
   }
 }

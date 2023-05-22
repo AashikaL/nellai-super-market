@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { CartItemsService } from '../cart-items.service';
-import { AllProductItemsService } from '../product_service/all-product-items.service';
 
 @Component({
   selector: 'app-cart',
@@ -9,63 +8,55 @@ import { AllProductItemsService } from '../product_service/all-product-items.ser
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-  qty: any = 1;
-  //  cartItems: any[]=[];
-  //  cartData: any[]=[];
+  qty: number = 1;
   totalPrice: number = 0;
   constructor(public cs: CartItemsService, private router: Router) {
-    let datas = cs.getData();
-    if (datas) {
-      datas.forEach((val: any) => {
-        this.cs.cartData.push(val)
-
+    let cartDatas = cs.getCart();
+    if (cartDatas) {
+      this.cs.cartData = [];
+      cartDatas.forEach((cartData: any) => {
+        if (cartData.status === 'In Cart') {
+          this.cs.cartData.push(cartData);
+        }
+        console.log('cartData', this.cs.cartData);
       });
     }
-    let clothData = cs.getclothing();
-    if (clothData) {
-      clothData.forEach((val: any) => {
-        this.cs.cartData.push(val)
-      });
-    }
-    console.log('data', this.cs.cartData)
   }
   ngOnInit() {
-    // this.addToCart();
+    this.findTotalprice();
   }
-  // addToCart(){
-  //   this.cartItems = this.cs.getData();
-  //   this.cartItems = this.cs.getclothing();
-  // }
-  changeQty(item: any, changeType: any,) {
-    this.cs.cartData.find(ci => {
+  changeQty(item: any, changeType: any) {
+    const MIN_QTY = 0;
+    const MAX_QTY = 10;
+    this.cs.cartData.map(ci => {
       if (ci.id === item.id) {
-        if (changeType === '+') {
+        if (changeType === '+' && ci.qty < MAX_QTY) {
           ci.qty = ci.qty + 1
-          // this.qty ++;
-        } else if (changeType === '-') {
+        } else if (changeType === '-' && ci.qty > MIN_QTY) {
           ci.qty = ci.qty - 1
-          // this.qty --;
+        }
+        if (ci.qty === 0) {
+          const index = this.cs.cartData.indexOf(ci);
+          this.cs.cartData.splice(index, 1);
         }
       }
+      // console.log('ci', ci);
+      return ci;
     })
-    console.log(this.cs)
-    this.cs.cartData.forEach((val: any) => {
-      this.totalPrice += val.cost * val.qty
-      // console.log('val', this.totalPrice);
-      // console.log('val', val.cost * this.qty)
-    })
+       this.findTotalprice();
   }
-  clearCart() {
+  emptycart() {
     this.cs.cartData = [];
-    localStorage.removeItem('data');
-    localStorage.removeItem('clothing');
-    return this.cs.cartData
+    localStorage.removeItem('Cart');
+    return this.cs.cartData;
   }
-  removeItem(i: number): void {
-    this.cs.cartData.splice(i, 1);
-  }
-  test(qty: any) {
-    console.log(qty)
+  findTotalprice(){
+    console.log(this.cs)
+    this.totalPrice = 0
+    this.cs.cartData.forEach((val: any) => {
+      // console.log('val',val);
+      this.totalPrice += val.cost * val.qty;
+    })
   }
 }
 

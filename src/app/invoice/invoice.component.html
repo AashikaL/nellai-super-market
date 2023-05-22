@@ -1,9 +1,9 @@
 <div class="container">
     <div class="alert alert-warning d-print-none mt-4" style="width: 70rem;" role="alert">
-        Thank you so much <strong></strong>.Your order has been placed successfully and will be delivered in <strong>3
+        Thank you so much <strong>{{currentOrder?.name}}</strong>.Your order has been placed successfully and will be delivered in <strong>3
             days.</strong>
         <button class="btn btn-sm btn-info ml-2 mr-1" (click)="print()">Print Invoice</button><button
-            class="btn btn-sm btn-info ml-1" routerLink="/phone">Place a New Order</button>
+            class="btn btn-sm btn-info ml-1" routerLink="/products">Place a New Order</button>
 
     </div>
 
@@ -11,13 +11,13 @@
     <div class="card  mt-4" style="width: 70rem;" *ngFor="let companyDetails of companyDetails">
         <div class="card-header">
             Invoice Date:
-            <strong>{{invoiceDate | date:'d-MMM-yyyy'}}</strong>
+            <strong>{{currentOrder.orderDate}}</strong>
             <span class="float-right"> <strong>Status:</strong> Pending</span>
         </div>
         <div class="container">
             <div class="row mt-4 mb-4">
                 <div class="col-sm-6">
-                    <h6 class="mb-3">From:</h6>
+                    <h6 class="mb-3" >From:</h6>
                     <div>
                         <strong>{{companyDetails.name}}</strong>
                     </div>
@@ -26,21 +26,22 @@
                     <div>Email: {{companyDetails.email}}</div>
                     <div>Phone: {{companyDetails.phone}}</div>
                 </div>
-            </div>
-        </div>
-<!-- 
-        <div class="col-sm-6">
+            
+      
+
+        <div class="col-2">
             <h6 class="mb-3">To:</h6>
             <div>
-                <strong>{{customerDetails.firstName}}</strong>
+                <strong>{{currentOrder?.name}}</strong>
             </div>
-            <div>{{customerDetails.address}}</div>
-            <div>{{customerDetails.city}},{{customerDetails.state}},{{customerDetails.zip}}</div>
-            <div>Email: {{customerDetails.email}}</div>
-            <div>Phone: {{customerDetails.mobile}}</div>
+            <div>{{currentOrder.address}}</div>
+            <div>{{currentOrder.city}},{{currentOrder.state}},{{currentOrder.zip}}</div>
+            <div>Email: {{currentOrder.email}}</div>
+            <div>Phone: {{currentOrder.phNumber}}</div>
         </div>
-    </div> -->
-
+    </div>
+</div>
+</div>
 
 
     <div class="table-responsive-sm">
@@ -54,13 +55,13 @@
                     <th class="right">Total</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr *ngFor="let cartData of cartDatas; let i=index;">
+            <tbody   >
+                <tr *ngFor="let product of currentOrder.product; let i=index;">
                     <td class="center">{{i+1}}</td>
-                    <td class="left strong">{{cartData.name}}</td>
-                    <td class="right">{{(cartData.price * cartData.qty)}}</td>
-                    <td class="center">{{cartData.qty}}</td>
-                    <td class="right">{{cartData.price}}</td>
+                    <td class="left strong">{{product.name}}</td>
+                    <td class="right">{{product.cost * product.qty}}</td>
+                    <td class="center">{{product.qty}}</td>
+                    <td class="right">{{product.cost}}</td>
                 </tr>
 
             </tbody>

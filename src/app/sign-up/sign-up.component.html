@@ -54,38 +54,36 @@
                         </div>
                     </div>
 
-                <small for="birthday" class="text-muted">Birthday</small>
+                <small for="birthday" class="text-muted">DOB</small>
                 <div>
                     <input
                         [ngClass]="{'is-invalid':myForm.controls['birth'].invalid && myForm.controls['birth'].touched}"
                         class="form-control" formControlName="birth" type="date" id="birthday" name="birthday" required>
                 </div>
                 <small class="text-muted">Gender</small>
-                <div class="container">
                     <div class="row">
-                        <div class="col border mr-sm-2 mt-2 form-control">
-                            <div class="form-check">
+                        <div class="col border mx-3 mr-sm-2 mt-2 form-control">
+                            <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                    id="flexRadioDefault1" checked>Female
+                                    id="flexRadioDefault1">Female
                             </div>
                         </div>
                         <div class="col border mr-sm-2 mt-2 form-control">
-                            <div class="form-check">
+                            <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                    id="flexRadioDefault2">male
+                                    id="flexRadioDefault2">Male
                             </div>
                         </div>
                         <div class="col border mr-sm-2 mt-2 form-control">
-                            <div class="form-check">
+                            <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="flexRadioDefault"
                                     id="flexRadioDefault2">Custom
                             </div>
                         </div>
                     </div>
-                </div>
                 <div class="d-grid gap-2 col-6 mx-auto mt-4 mt-5">
                     <button type="submit" class="btn btn-success btn-sm" (click)="onSubmit()"
-                        [disabled]="myForm.invalid">Sing Up</button>
+                        [disabled]="myForm.invalid">Sign Up</button>
                 </div>
             </div>
         </form>

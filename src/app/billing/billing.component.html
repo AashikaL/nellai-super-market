@@ -1,90 +1,184 @@
-<div class="d-flex justify-content-center">
-    <div class="card mt-4 mb-4" style="width: 35rem;">
-        <div class="card-header">
-            <h5 style="text-align: center;">Billing Address</h5>
-            <p class="text-muted" style="text-align:center;">It's quick and easy.</p>
-        </div>
-        <form [formGroup]="myForm">
-            <div class="card-body">
-                <div class="form-group">
-                    <label>Full Name</label>
-                    <input type="name"
-                        [ngClass]="{'is-invalid':myForm.controls['name'].invalid && myForm.controls['name'].touched}"
-                        formControlName="name" class="form-control" placeholder="Lakshmi L.">
-                    <div class="invalid-feedback">
-                        Please enter name
+<div class="container">
+    <div class="row">
+        <div class="col-4"> </div>
+        <h3 class="mt-3">Select a delivery address</h3>
+        <div class="card mt-5">
+            <div *ngFor="let billing of billingAddress">
+                <div class="col-4">
+                    <div class="container mt-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"
+                                (click)="selectedBillingAddress=billing"  (click)="onRadioSelected(billing)" >
+                            <label class="form-check-label" for="flexRadioDefault1" >
+                                <strong>{{billing.name}}</strong>
+                                <p>{{billing.address}}, {{billing.city}}, {{billing.state}}, {{billing.zip}},
+                                    PhoneNumber:{{billing.phNumber}}</p>
+                            </label>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email"
-                        [ngClass]="{'is-invalid':myForm.controls['email'].invalid && myForm.controls['email'].touched}"
-                        formControlName="email" class="form-control" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" placeholder="lakshmi@example.com">
-                    <div class="invalid-feedback">
-                        Please enter email
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Address</label>
-                    <input type="Address"
-                        [ngClass]="{'is-invalid':myForm.controls['address'].invalid && myForm.controls['address'].touched}"
-                        formControlName="address" class="form-control" placeholder="542 W. 15th Street">
-                    <div class="invalid-feedback">
-                        Please enter address
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>City</label>
-                    <input type="city"
-                        [ngClass]="{'is-invalid':myForm.controls['city'].invalid && myForm.controls['city'].touched}"
-                        formControlName="city" class="form-control" placeholder="Tirunelveli">
-                    <div class="invalid-feedback">
-                        Please enter city
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Zip</label>
-                    <input type="zip"
-                    [ngClass]="{'is-invalid':myForm.controls['zip'].invalid && myForm.controls['zip'].touched}"
-                        formControlName="zip" class="form-control" placeholder="10001">
-                    <div class="invalid-feedback">
-                        Please enter zip
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>State</label>
-                    <input type="state"
-                        [ngClass]="{'is-invalid':myForm.controls['state'].invalid && myForm.controls['state'].touched}"
-                        formControlName="state" class="form-control" placeholder="Tamil Nadu">
-                    <div class="invalid-feedback">
-                        Please enter state
-                    </div>
-                </div>
-                <label>
-                    <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
-                </label>
-                <div class="row">
-                    <div class="col-4 mx-auto mt-3 mt-4 mb-1">
-                        <button type="submit" class="btn btn-sm btn-primary" (click)="onSubmit()" [disabled]="myForm.invalid">Place Order</button>
-                    </div>
-                    <div class=" col-4 mx-auto mt-3 mt-4 mb-1 ">
-                        <a routerLink="/phone" class="btn btn-sm btn-info float-right" style="height: 100%;">Continue
-                            Shopping</a>
-                    </div>
+                <div>
                 </div>
             </div>
-        </form>
+            <a class="ml-5 mb-4" data-toggle="modal" data-target="#billingFormModal">+ Add a new Address</a>
+            <button type="submit" class="btn btn-sm btn-primary" [disabled]="!selectedOption" (click)="useThisAddress()">Use this address
+            </button>
+        </div>
+
+        <div class="col ">
+            <h6 class="d-flex justify-content-between align-items-center mt-5 mb-3">
+                <span class="text-muted">Order Summary</span>
+                <span class="badge badge-warning badge-pill">{{cs.cartData.length}}</span>
+            </h6>
+            <ul class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between" *ngFor="let cartData of cs.cartData ">
+                    <div>
+                        <h6 class="">{{cartData.name}} - <span
+                                class="badge badge-pill badge-info text-right">{{cartData.qty}}
+                                Nos</span> x
+                            <span class="badge badge-pill badge-default text-right">{{cartData.cost}}
+                            </span>
+                        </h6>
+                    </div>
+                    <span class="text-muted">{{cartData.cost * cartData.qty}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between bg-light">
+                    <span>Total (INR)</span>
+                    <strong>{{totalPrice}}</strong>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- 
+<div class="col-4 ">
+    <h6 class="d-flex justify-content-between align-items-center mt-5 mb-3">
+        <span class="text-muted">Order Summary</span>
+        <span class="badge badge-warning badge-pill">{{cs.buyData.length}}</span>
+    </h6>
+    <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-between" *ngFor="let buyData of cs.buyData; ">
+            <div>
+                <h6 class="">{{buyData.name}} - <span class="badge badge-pill badge-info text-right">{{buyData.qty}}
+                        1 Nos</span> x
+                    <span class="badge badge-pill badge-default text-right">{{buyData.cost}}
+                    </span>
+                </h6>
+            </div>
+            <span class="text-muted">{{buyData.cost}}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between bg-light">
+            <span>Total (INR)</span>
+            <strong>{{cs.buyData.cs.cost}}</strong>
+        </li>
+    </ul>
+</div> -->
+
+<div class="modal" id="billingFormModal" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+    aria-hidden="true">
+    <div class="d-flex justify-content-center">
+        <div class="card mt-4 mb-4" style="width: 35rem;">
+            <div class="card-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 style="text-align: center;">Billing Address</h5>
+                <p class="text-muted" style="text-align:center;">It's quick and easy.</p>
+            </div>
+            <form [formGroup]="billingForm">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="name"
+                            [ngClass]="{'is-invalid':billingForm.controls['name'].invalid && billingForm.controls['name'].touched}"
+                            formControlName="name" class="form-control" placeholder="Lakshmi L.">
+                        <div class="invalid-feedback">
+                            Please enter name
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email"
+                            [ngClass]="{'is-invalid':billingForm.controls['email'].invalid && billingForm.controls['email'].touched}"
+                            formControlName="email" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" placeholder="lakshmi@example.com">
+                        <div class="invalid-feedback">
+                            Please enter email
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel"
+                            [ngClass]="{'is-invalid':billingForm.controls['phNumber'].invalid && billingForm.controls['phNumber'].touched}"
+                            formControlName="phNumber" class="form-control" placeholder="9232332322">
+                        <div class="invalid-feedback">
+                            Please enter Phone Number
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input type="Address"
+                            [ngClass]="{'is-invalid':billingForm.controls['address'].invalid && billingForm.controls['address'].touched}"
+                            formControlName="address" class="form-control" placeholder="542 W. 15th Street">
+                        <div class="invalid-feedback">
+                            Please enter address
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>City</label>
+                        <input type="city"
+                            [ngClass]="{'is-invalid':billingForm.controls['city'].invalid && billingForm.controls['city'].touched}"
+                            formControlName="city" class="form-control" placeholder="Tirunelveli">
+                        <div class="invalid-feedback">
+                            Please enter city
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Zip</label>
+                        <input type="zip"
+                            [ngClass]="{'is-invalid':billingForm.controls['zip'].invalid && billingForm.controls['zip'].touched}"
+                            formControlName="zip" class="form-control" placeholder="10001">
+                        <div class="invalid-feedback">
+                            Please enter zip
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>State</label>
+                        <input type="state"
+                            [ngClass]="{'is-invalid':billingForm.controls['state'].invalid && billingForm.controls['state'].touched}"
+                            formControlName="state" class="form-control" placeholder="Tamil Nadu">
+                        <div class="invalid-feedback">
+                            Please enter state
+                        </div>
+                    </div>
+                    <label>
+                        <input type="checkbox" checked="checked" name="Shipping
+                        "> Shipping address same as billing
+                    </label>
+                    <div *ngIf="billingfailed" style="color: rgb(233, 86, 86);">Invalid Email or Password</div>
+                    <div class="row">
+                        <div class="col-4 mx-auto mt-3 mt-4 mb-1">
+                            <button type="submit" class="btn btn-sm btn-primary" (click)="billingDetails()"
+                                [disabled]="billingForm.invalid">Place Order</button>
+                        </div>
+                        <div class=" col-4 mx-auto mt-3 mt-4 mb-1 ">
+                            <a routerLink="/products" class="btn btn-sm btn-info float-right"
+                                style="height: 100%;">Continue
+                                Shopping</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+<div class="modal fade" id="paymentFormModel" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <div class="modal-title" id="staticBackdropLabel">
+                <div class="modal-title" id="paymentFormModel">
                     <h5 style="text-align: center;">Payment</h5>
                     <p class="text-muted" style="text-align:center;">Accepted Cards</p>
                     <div class="row">
@@ -100,21 +194,29 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form [formGroup]="paymentForm">
                     <div class="card-body">
                         <div class="form-group">
                             <label>Full Name</label>
-                            <input type="email" class="form-control" placeholder="Lakshmi L.">
+                            <input type="cardname"
+                                [ngClass]="{'is-invalid':paymentForm.controls['cardname'].invalid && paymentForm.controls['cardname'].touched}"
+                                formControlName="cardname" class="form-control" placeholder="Lakshmi L.">
+                        </div>
+                        <div class="invalid-feedback">
+                            Please enter name
                         </div>
                         <div class="form-group">
-
                             <label>Credit card number</label>
-                            <input type="text" class="form-control" placeholder="1111-2222-3333-4444">
+                            <input type="cardnumber"
+                                [ngClass]="{'is-invalid':paymentForm.controls['cardNumber'].invalid && paymentForm.controls['cardNumber'].touched}"
+                                formControlName="cardNumber" class="form-control" placeholder="1111-2222-3333-4444">
                         </div>
                         <div class="form-group">
 
                             <label>Exp Month</label>
-                            <input type="text" class="form-control" placeholder="September">
+                            <input type="text"
+                                [ngClass]="{'is-invalid':paymentForm.controls['month'].invalid && paymentForm.controls['month'].touched}"
+                                formControlName="month" class="form-control" placeholder="September">
                         </div>
                         <div class="row">
                             <div class="col-4">
@@ -123,11 +225,14 @@
                             </div>
                             <div class="col-4">
                                 <label>CVV</label>
-                                <input type="text" class="form-control" placeholder="352">
+                                <input type="text"
+                                    [ngClass]="{'is-invalid':paymentForm.controls['cvv'].invalid && paymentForm.controls['cvv'].touched}"
+                                    formControlName="cvv" class="form-control" placeholder="352">
                             </div>
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-outline-primary mt-4">Confirm</button>
+                            <button type="submit" class="btn btn-outline-primary mt-4" [disabled]="paymentForm.invalid"
+                                (click)="confirmOrder()">Confirm</button>
                         </div>
 
                     </div>

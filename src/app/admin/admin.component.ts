@@ -1,85 +1,72 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CartItemsService } from '../cart-items.service';
-import { FirebaseService } from '../firebaseservice/firebase.service';
-
+declare var $: any;
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent {
-  myForm: FormGroup;
+  productAddForm: FormGroup;
   data: any;
-  items: any;
-  clothitmes: any[] = [];
-  constructor(private fs: FirebaseService) {
-    this.myForm = new FormGroup({
+  productItems: any[]=[];
+  //clothitems: any[] = [];
+  constructor() {
+    this.productAddForm = new FormGroup({
       type: new FormControl('', Validators.required),
       name: new FormControl('', Validators.required),
       cost: new FormControl('', Validators.required),
       color: new FormControl('', [Validators.required]),
       url: new FormControl('', [Validators.required]),
     })
-    let admin: any = localStorage.getItem('products');
-    const parse: any = JSON.parse(admin)
-    if (admin) {
-      // parse.forEach((val: any) => {
-      //   this.items.push(val)
-      // });
-      this.getProducts();
-    }
+    let product: any = localStorage.getItem('products');
+    this.productItems= JSON.parse(product)
   }
-  async _test() {
-    this.items = await this.fs.getCol('products',);
-    console.log('items', this.items)
-  }
-  async getProducts() {
-    this.items = await this.fs.getCol('products');
-    console.log('items', this.items)
-  }
-  async addNew() {
-    console.log('add', this.myForm.valid, this.myForm)
-    if (this.myForm.valid) {
+  addNewProduct() {
+    console.log('add', this.productAddForm.valid, this.productAddForm)
+    if (this.productAddForm.valid) {
       let data: any = {
-        type: this.myForm.value.type,
-        name: this.myForm.value.name,
-        cost: this.myForm.value.cost,
-        color: this.myForm.value.color,
-        url: this.myForm.value.url,
-        id: Math.round(Math.random() * 100000)
+        type: this.productAddForm.value.type,
+        name: this.productAddForm.value.name,
+        cost: this.productAddForm.value.cost,
+        color: this.productAddForm.value.color,
+        url: this.productAddForm.value.url,
+        id: Math.round(Math.random() * 100000),
+        status: 'In Progress'
       }
-      console.log(data)
+      // console.log(data);
       // if(data.type =='phone'){
-      // let product: any = localStorage.getItem('products');
-      // if (product) {
-      //   this.items = this.items.concat(data)
-      // }
-      // else {
-      //   this.items.push(data)
-      // }
-      // localStorage.setItem('products', JSON.stringify(this.items))
-      const ref = await this.fs.add('products', data);
-      console.log(ref);
-      // }else{
-      //   let clothing:any = localStorage.getItem('products');
-      //   if (clothing) {
-      //     this.clothitmes = this.clothitmes.concat(data)
-      //   }
-      //   else {
-      //     this.clothitmes.push(data)
-      //   }
-      //   localStorage.setItem('products', JSON.stringify(this.clothitmes))
-      // }
+      let product: any = localStorage.getItem('products');
+      if (product) {
+        this.productItems = this.productItems.concat(data);
+        // console.log('product',this.productItems);
+      }
+      else {
+        this.productItems.push(data)
+      }
+      localStorage.setItem('products', JSON.stringify(this.productItems));
+      this.resetAddItems();
+      $('#staticBackdrop').modal('hide');
     }
   }
   clearCart() {
-    this.items = [];
+    this.productItems = [];
     localStorage.removeItem('products');
-    return this.items;
+    return this.productItems;
   }
   removeItem(index: number) {
-    this.items = this.items.filter((val: any, i: any) => i != index);
-    localStorage.setItem('products', JSON.stringify(this.items));
+    this.productItems = this.productItems.filter((val: any, i: any) => i != index);
+    localStorage.setItem('products', JSON.stringify(this.productItems));
+  }
+  resetAddItems() {
+    this.productAddForm.reset({
+      type: '',
+      name: '',
+      cost: '',
+      color: '',
+      url: '',
+    })
   }
 }
+

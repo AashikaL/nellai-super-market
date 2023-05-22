@@ -1,26 +1,27 @@
-<app-navbar></app-navbar>
+<!-- <app-navbar></app-navbar>
 <h1>women's clothings</h1>
 <div class="container">
   <div class="row">
-    <div class="col-12 col-md-4 d-flex justify-content-center align-items-center" *ngFor=" let clothing of admins">
+    <div class="col-12 col-md-4 d-flex justify-content-center align-items-center" *ngFor=" let product of products">
       <div class="card mt-4" style="width: 18rem;">
-        <h5 class="card-header">{{clothing.name}}</h5>
+        <h5 class="card-header">{{product.name}}</h5>
         <div class="card-body">
-          <img class="card-img-top mx-auto d-block" [src]="clothing.url" alt="product.alt">
+          <img class="card-img-top mx-auto d-block" [src]="product.url" alt="product.alt">
           <p class="card-text"></p>
-          <div>{{clothing.color}}</div>
-          <div> {{clothing.cost | currency: 'INR'}}</div>
+          <div>{{product.color}}</div>
+          <div> {{product.cost | currency: 'INR'}}</div>
         </div>
         <div class="card-footer">
           <div class="row ">
             <div class="col">
               <div>
-                <a style="background-color:#F27127" class="btn" routerLink="/buynow">Buy Now</a>
+                <button style="background-color:#F27127" class="btn" routerLink="/buynow">Buy Now</button>
               </div>
             </div>
             <div class="col">
-              <a (click)="clothingdata(clothing)" data-toggle="modal" data-target="#exampleModal"
-                class="btn btn-warning">Add To Cart</a>
+              <button data-toggle="modal"  *ngIf="product['status'] !== 'In Cart'" data-target="#exampleModal" class="btn btn-warning"
+                (click)="AddToCart(product)">Add To Cart</button>
+              <button class="btn btn-warning" *ngIf="product['status'] === 'In Cart'">Go To Cart</button>
             </div>
           </div>
         </div>
@@ -31,7 +32,7 @@
 
 
 
-<!-- Modal -->
+
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -44,4 +45,4 @@
     </div>
   </div>
 </div>
-<app-footer></app-footer>
+<app-footer></app-footer>-->

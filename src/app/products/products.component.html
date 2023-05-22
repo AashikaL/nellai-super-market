@@ -1,0 +1,39 @@
+<app-navbar (searchValue)="getValue($event)"></app-navbar>
+<h1></h1>
+<div class="container">
+  <div class="row">
+    <div class="col col-md-4 d-flex justify-content-center align-items-center" *ngFor=" let product of productItems; ">
+      <div class="card mt-4" style="width: 18rem;">
+        <div (click)="newPage(product)">
+        <h5 class="card-header">{{product.name}}</h5>
+        <div class="card-body">
+          <img class="card-img-top mx-auto d-block" [src]="product.url" alt="product.alt">
+          <p class="card-text"></p>
+          <div>Color: {{product.color}}</div>
+          <div>Price: {{product.cost | currency: 'INR'}}</div>
+        </div>
+      </div>
+        <div class="card-footer">
+          <div class="row ">
+            <div class="col">
+              <div>
+                <a class="btn btn-info" (click)="buyNow(product)">Buy Now</a>
+              </div>
+            </div>
+            <div class="col">
+              <a class="btn btn-warning"  *ngIf="product['status'] !== 'In Cart'" (click)="addToCart(product)">Add To Cart</a>
+                <button class="btn btn-warning" *ngIf="product['status'] === 'In Cart'" routerLink="/cart">Go To Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+
+
+
+
+<app-footer></app-footer>

@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Nellai Market</a>
+<nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color: #e3f2fd;">
+  <a class="navbar-brand">Nellai Market</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -9,31 +9,25 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" routerLink="/home" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" routerLink="">Home <span class="sr-only">(current)</span></a>
       </li>
+      <!-- <li class="nav-item">
+        <a class="nav-link" routerLink="/products">Product</a>
+      </li> -->
       <li class="nav-item">
-        <a class="nav-link" routerLink="/clothing" href="#">Clothing</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/phone" href="#">Phone</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Contact</a>
+        <a class="nav-link" routerLink="/myorder">MyOrder</a>
       </li>
     </ul>
 
     <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success mr-sm-2" type="submit">Search</button>
+      <input class="form-control mr-sm-2" type="search" [(ngModel)]="searchTerm" name="searchBar" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success mr-sm-2" (click)="sentValue()">Search</button>
       <button class="btn btn-outline-primary mr-sm-2" type="submit" routerLink="/login">Logout</button>
-      <button class="btn btn-outline-secondary mr-sm-2" type="submit" routerLink="/invoice">MyOrder</button>
+      <!-- <button class="btn btn-outline-secondary mr-sm-2" type="submit" routerLink="/myorder">MyOrder</button> -->
       <button class="btn btn-outline-info mr-sm-2" type="submit" data-toggle="modal"
         data-target="#staticBackdrop">Admin</button>
-      <button class="btn btn-outline-warning my-2 my-sm-0" routerLink="/cart"> <img src="../assets/cart.svg"
-          alt="" >Cart</button>
+      <button class="btn btn-outline-warning my-2 my-sm-0" routerLink="/cart"> <img src="../assets/cart.svg" alt="">Cart
+        <span class="badge badge-warning">{{cs.cartData.length}}</span></button>
     </form>
   </div>
 </nav>
@@ -56,7 +50,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form (ngSubmit)="onSubmit()"> 
+        <form (ngSubmit)="adminLogin()">
           <div class="card-body">
             <div class="form-group">
               <label>Email</label>
@@ -69,7 +63,7 @@
             </div>
             <div *ngIf="loginFailed" style="color: rgb(233, 86, 86);">Invalid Email or Password</div>
             <div>
-              <button type="submit" class="btn btn-outline-primary mt-4" (click)="onSubmit()">Login</button>
+              <button type="submit" class="btn btn-outline-primary mt-4" (click)="adminLogin()">Login</button>
             </div>
           </div>
         </form>

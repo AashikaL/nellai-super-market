@@ -1,0 +1,25 @@
+<h1 class="text-center mt-4">Traffic Signal</h1>
+<div class="d-flex justify-content-center">
+    <input type="text" class="col-4 form-control" [(ngModel)]="currentLight">
+</div>
+<div class="mt-4 mb-5 traffic-signal text-center">
+    <div class="row">
+        <div class="col-4">
+            <span class="dot mx-4 red" [ngClass]="{'active-red': currentLight === 'red'}"></span>
+        </div>
+        <div class="col-4">
+            <span class="dot mx-4 yellow" [ngClass]="{'active-yellow': currentLight === 'yellow'}"></span>
+        </div>
+        <div class="col">
+            <span class="dot mx-4 green" [ngClass]="{'active-green': currentLight === 'green'}"></span>
+        </div>
+    </div>
+</div>
+<div class="bike">
+    <img src="../../assets/Screenshot from 2023-05-15 10-06-45.png" alt="">
+</div>
+<!-- <div>
+    <h1 [ngStyle]="{'color' : action ? 'yellow' : 'blue'}">blub</h1>
+    <button class="btn" [ngClass]="action ? 'bg-primary' : 'bulb2'" (click)="actions()">Tree</button>
+</div> -->
+
