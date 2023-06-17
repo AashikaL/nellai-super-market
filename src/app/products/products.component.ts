@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartItemsService } from '../cart-items.service';
+// import { ServerService } from '../service/service.service';
 
 @Component({
   selector: 'app-products',
@@ -11,17 +13,47 @@ export class ProductsComponent {
   productItems: any;
   cartData: any[] = [];
   // buyData: any[] = [];
-  constructor(private cs: CartItemsService, private router: Router) {
-    let product = localStorage.getItem('productType');
-    if (product) {
-      const productData = JSON.parse(product);
-      this.productItems = productData;
-    }
+  constructor(private cs: CartItemsService, private router: Router, private http : HttpClient) {
+    let productType:any = localStorage.getItem('productType');
+    let type = JSON.parse(productType);
+     this.cs.getProductsDB().subscribe(
+      (response: any) => {
+        console.log(response);
+        this.productItems = response.data.filter((element: any) => element.type === type);
+        console.log('type', this.productItems);
+      })
+    // let product = localStorage.getItem('productType');
+    // if (product) {
+    //   const productData = JSON.parse(product);
+    //   this.productItems = productData;
+   
     const cartItem: any = this.cs.getCart();
     if (cartItem) {
       this.cartData = this.cartData.concat(cartItem);
     }
+    // this.getProduct();
   }
+  
+  currentRating = 0;
+
+  rate(product: any, rating: number) {
+    product.rating = rating;
+    console.log(`Rated ${rating} stars for ${product.name}`);
+  }
+  
+
+  // async getProduct() {
+  //   const newEvent: any = {
+  //     owner: 'aasika',
+  //     name: 'test',
+  //     description: 'description',
+  //     date: '2023/05/23'
+  //   }
+  //   await this.ss.createEvent(newEvent).then(() => {
+  //    // this.getEvents();
+  //   });
+  // }
+
   addToCart(data: any) {
     data.qty = 1;
     data.status = 'In Cart';
@@ -34,6 +66,9 @@ export class ProductsComponent {
         // console.log('cart', item);
         item.qty += 1;
         this.cartData = cartItems;
+
+
+        
       } else {
         this.cartData.push(data);
         // this.cartData = [];
@@ -71,5 +106,15 @@ export class ProductsComponent {
     this.cs.setProductView(product);
     this.router.navigate(['/overview']);
 
+  }
+  getUserData() {
+    this.http.get('http://localhost:3000/user').subscribe(
+    (response)=> {
+    console.log(response); // Handle the response here
+},
+    (error)=> {
+    console.error(error); // Handle any errors here
+    }
+    );
   }
 }

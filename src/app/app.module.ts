@@ -22,6 +22,7 @@ import { ProductsComponent } from './products/products.component';
 import { NotFoundComponentComponent } from './not-found-component/not-found-component.component';
 import { ProductOverViewComponent } from './product-over-view/product-over-view.component';
 import { AdminOrderComponent } from './admin-order/admin-order.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { AdminOrderComponent } from './admin-order/admin-order.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule
   ],
   exports: [
     FilterPipe

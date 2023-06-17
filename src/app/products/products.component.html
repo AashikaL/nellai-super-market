@@ -9,9 +9,17 @@
         <div class="card-body">
           <img class="card-img-top mx-auto d-block" [src]="product.url" alt="product.alt">
           <p class="card-text"></p>
+          
           <div>Color: {{product.color}}</div>
           <div>Price: {{product.cost | currency: 'INR'}}</div>
         </div>
+      </div>
+      <div>
+        <span class="star" [ngClass]="{'filled': product.rating >= 1}" (click)="rate(product, 1)">&#9733;</span>
+        <span class="star" [ngClass]="{'filled': product.rating >= 2}" (click)="rate(product, 2)">&#9733;</span>
+        <span class="star" [ngClass]="{'filled': product.rating >= 3}" (click)="rate(product, 3)">&#9733;</span>
+        <span class="star" [ngClass]="{'filled': product.rating >= 4}" (click)="rate(product, 4)">&#9733;</span>
+        <span class="star" [ngClass]="{'filled': product.rating >= 5}" (click)="rate(product, 5)">&#9733;</span>
       </div>
         <div class="card-footer">
           <div class="row ">

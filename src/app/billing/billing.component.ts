@@ -51,15 +51,15 @@ export class BillingComponent implements OnInit {
     this.findTotalprice();                                                          // cart Total price call
 
     let cartDatas = cs.getCart();
-    // if (cartDatas) {
-    //   this.cs.cartData = [];
-    //   cartDatas.forEach((cartData: any) => {
-    //     if (cartData) {
-    //       this.cs.cartData.push(cartData)
-    //     }
-    //     console.log('cartData', this.cs.cartData);
-    //   });
-    // }
+    if (cartDatas) {
+      this.cs.cartData = [];
+      cartDatas.forEach((cartData: any) => {
+        if (cartData) {
+          this.cs.cartData.push(cartData)
+        }
+        console.log('cartData', this.cs.cartData);
+      });
+    }
 
     const bilingLocalStorage: any = localStorage.getItem('BillingAddress');
     // console.log('this.billingAddress', this.billingAddress);
@@ -109,7 +109,7 @@ export class BillingComponent implements OnInit {
     $('#paymentFormModel').modal('hide');
     // let cartDatas = this.cs.getOrder();
     const cartItems: any = localStorage.getItem('Cart');
-    let parseItem = JSON.parse(cartItems);
+    let cartproduct = JSON.parse(cartItems);
     // const orderItems = localStorage.getItem('Order');
 
     // console.log(this.orders);
@@ -127,7 +127,7 @@ export class BillingComponent implements OnInit {
       zip: this.selectedBillingAddress.zip,
       orderDate: new Date().toDateString(),
       id: Math.round(Math.random() * 1000000),
-      product: parseItem,
+      product: cartproduct,
     }
     // console.log('datas', data);
     if (this.orders) {
